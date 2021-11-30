@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 
@@ -37,7 +38,7 @@ public class CustomerController {
     }
 
     @PostMapping(value = "/customers")
-    public ResponseEntity<Object> addCustomer(@RequestBody CustomerRequestDto customerRequestDto) {
+    public ResponseEntity<Object> addCustomer(@Valid @RequestBody CustomerRequestDto customerRequestDto) {
         int newId = customerService.addCustomer(customerRequestDto);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newId).toUri();

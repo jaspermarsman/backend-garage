@@ -7,11 +7,11 @@ public class CustomerRequestDto {
     //attributen
 
     @NotBlank
-    @Size(min=1, max=25)
+    @Size(min=1, max=25, message = "Firstname should at least contain 1 character and have a maximum of 25 characters")
     private String firstName;
 
     @NotBlank
-    @Size(min=1, max=51)
+    @Size(min=1, max=50, message = "Secondname should at least contain 1 character and have a maximum of 50 characters")
     private String secondName;
 
     //getters setters

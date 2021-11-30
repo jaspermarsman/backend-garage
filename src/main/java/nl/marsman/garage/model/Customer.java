@@ -3,7 +3,7 @@ package nl.marsman.garage.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Klanten")
+@Table(name = "Customers")
 public class Customer {
 
     //attributen

@@ -1,5 +1,6 @@
 package nl.marsman.garage.service;
 
+import nl.marsman.garage.dto.CustomerRequestDto;
 import nl.marsman.garage.exception.RecordNotFoundException;
 import nl.marsman.garage.model.Customer;
 import nl.marsman.garage.repository.CustomerRepository;
@@ -46,12 +47,11 @@ public class CustomerService {
         }
     }
 
-    public int addCustomer(Customer customer) {
-//        String isbn = customer.getIsbn();
-//        List<Book> books = (List<Book>)bookRepository.findAllByIsbn(isbn);
-//        if (books.size() > 0) {
-//            throw new BadRequestException("Isbn already exists!!!");
-//        }
+    public int addCustomer(CustomerRequestDto customerRequestDto) {
+
+        Customer customer = new Customer();
+        customer.setFirstName(customerRequestDto.getFirstName());
+        customer.setSecondName(customerRequestDto.getSecondName());
 
         Customer newCustomer = customerRepository.save(customer);
         return newCustomer.getId();

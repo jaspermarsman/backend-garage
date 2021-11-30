@@ -1,5 +1,6 @@
 package nl.marsman.garage.controller;
 
+import nl.marsman.garage.dto.CustomerRequestDto;
 import nl.marsman.garage.model.Customer;
 import nl.marsman.garage.repository.CustomerRepository;
 import nl.marsman.garage.service.CustomerService;
@@ -36,8 +37,8 @@ public class CustomerController {
     }
 
     @PostMapping(value = "/customers")
-    public ResponseEntity<Object> addCustomer(@RequestBody Customer customer) {
-        int newId = customerService.addCustomer(customer);
+    public ResponseEntity<Object> addCustomer(@RequestBody CustomerRequestDto customerRequestDto) {
+        int newId = customerService.addCustomer(customerRequestDto);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newId).toUri();
 

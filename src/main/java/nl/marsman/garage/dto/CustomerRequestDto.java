@@ -11,7 +11,7 @@ public class CustomerRequestDto {
     private String firstName;
 
     @NotBlank
-    @Size(min=1, max=50, message = "Secondname should at least contain 1 character and have a maximum of 50 characters")
+    @Size(min=1, max=50, message = "SecondName should at least contain 1 character and have a maximum of 50 characters")
     private String secondName;
 
     //getters setters

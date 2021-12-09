@@ -1,6 +1,7 @@
 package nl.marsman.garage.controller;
 
 import nl.marsman.garage.dto.CustomerRequestDto;
+import nl.marsman.garage.model.Car;
 import nl.marsman.garage.model.Customer;
 import nl.marsman.garage.repository.CustomerRepository;
 import nl.marsman.garage.service.CustomerService;
@@ -58,6 +59,17 @@ public class CustomerController {
         customerService.partialUpdateCustomer(id, customer);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/customers/{id}/cars")
+    public ResponseEntity<Object> getCustomerCars(@PathVariable int id) {
+        return  ResponseEntity.ok(customerService.getCustomerCars(id));
+    }
+
+    @PostMapping(value = "/customers/{id}/cars")
+    public ResponseEntity<Object> addCustomerCars(@PathVariable int id, @RequestBody Car car) {
+        customerService.addCustomerCars(id, car);
+        return  ResponseEntity.created(null).build();
     }
 
 

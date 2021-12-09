@@ -26,7 +26,7 @@ public class CarController {
         return ResponseEntity.ok(carService.getCar(id));
     }
 
-    @DeleteMapping(value = "/cars{id}")
+    @DeleteMapping(value = "/cars/{id}")
     public ResponseEntity<Object> deleteCar(@PathVariable("id") int id) {
         carService.deleteCar(id);
         return  ResponseEntity.noContent().build();

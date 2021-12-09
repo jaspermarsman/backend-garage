@@ -1,6 +1,10 @@
 package nl.marsman.garage.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Customers")
@@ -13,6 +17,10 @@ public class Customer {
 
     private String firstName;
     private String secondName;
+
+
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Car> cars = new ArrayList<>();
 
     //constructor
 
@@ -41,5 +49,13 @@ public class Customer {
 
     public void setSecondName(String secondName) {
         this.secondName = secondName;
+    }
+
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
     }
 }

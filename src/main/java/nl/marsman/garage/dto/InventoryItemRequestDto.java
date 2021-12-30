@@ -1,27 +1,27 @@
-package nl.marsman.garage.model;
+package nl.marsman.garage.dto;
 
-import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "car part")
-public class InventoryItem {
+public class InventoryItemRequestDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    //attributen
+
+    @NotBlank
+    @Size(min=1, max=100)
     private String description;
+
+    @NotBlank
+    @Min(0)
     private double price;
+
+    @NotBlank
+    @Min(0)
     private int amountInStock;
 
     // getters and setters
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getDescription() {
         return description;

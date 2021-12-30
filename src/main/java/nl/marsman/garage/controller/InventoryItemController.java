@@ -1,6 +1,8 @@
 package nl.marsman.garage.controller;
 
+import nl.marsman.garage.dto.InventoryItemRequestDto;
 import nl.marsman.garage.model.InventoryItem;
+import nl.marsman.garage.service.InventoryItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +24,7 @@ public class InventoryItemController {
 
     @GetMapping(value = "/inventoryitems/{id}")
     public ResponseEntity<Object> getInventoryItem(@PathVariable int id) {
-        return ResponseEntity.ok(inventoryItemService.getInventoryitem(id));
+        return ResponseEntity.ok(inventoryItemService.getInventoryItem(id));
     }
 
     @DeleteMapping(value = "/inventoryitems/{id}")
@@ -48,12 +50,12 @@ public class InventoryItemController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping(value = "/inventoryitems/{id}")
-    public ResponseEntity<Object> partialUpdateInventoryItem(@PathVariable int id, @RequestBody InventoryItem inventoryItem) {
-        inventoryItemService.partialUpdateInventoryItem(id, inventoryItem);
-
-        return ResponseEntity.noContent().build();
-    }
+//    @PatchMapping(value = "/inventoryitems/{id}")
+//    public ResponseEntity<Object> partialUpdateInventoryItem(@PathVariable int id, @RequestBody InventoryItem inventoryItem) {
+//        inventoryItemService.partialUpdateInventoryItem(id, inventoryItem);
+//
+//        return ResponseEntity.noContent().build();
+//    }
 
 
 

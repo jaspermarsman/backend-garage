@@ -1,7 +1,6 @@
 package nl.marsman.garage.controller;
 
 import nl.marsman.garage.dto.CarRequestDto;
-import nl.marsman.garage.model.Car;
 import nl.marsman.garage.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

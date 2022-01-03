@@ -14,7 +14,6 @@ public class Car {
 
     private String brand;
     private String model;
-    private int modelYear;
     private String licensePlate;
     //autopapieren nog toevoegen
 
@@ -48,14 +47,6 @@ public class Car {
 
     public void setModel(String model) {
         this.model = model;
-    }
-
-    public int getModelYear() {
-        return modelYear;
-    }
-
-    public void setModelYear(int modelYear) {
-        this.modelYear = modelYear;
     }
 
     public String getLicensePlate() {

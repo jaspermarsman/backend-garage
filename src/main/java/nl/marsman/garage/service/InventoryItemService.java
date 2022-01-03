@@ -65,7 +65,7 @@ public class InventoryItemService {
             inventoryItemRepository.save(inventoryItem);
         }
         else {
-            throw new RecordNotFoundException("ID does not exist!")
+            throw new RecordNotFoundException("ID does not exist!");
         }
     }
 

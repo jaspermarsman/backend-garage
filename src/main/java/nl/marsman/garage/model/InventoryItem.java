@@ -3,7 +3,7 @@ package nl.marsman.garage.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "car part")
+@Table(name = "car_part")
 public class InventoryItem {
 
     @Id

@@ -1,6 +1,7 @@
 package nl.marsman.garage.controller;
 
 import nl.marsman.garage.dto.CarRequestDto;
+import nl.marsman.garage.model.Car;
 import nl.marsman.garage.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,4 +39,20 @@ public class CarController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newId).toUri();
         return ResponseEntity.created(location).build();
     }
+
+    @PutMapping(value = "/cars/{id}")
+    public ResponseEntity<Object> updateCar(@PathVariable int id, @RequestBody Car car) {
+        carService.updateCar(id, car);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping(value = "/cars/{id}")
+    public ResponseEntity<Object> partialUpdateCar(@PathVariable int id, @RequestBody Car car) {
+        carService.partialUpdateCar(id, car);
+
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

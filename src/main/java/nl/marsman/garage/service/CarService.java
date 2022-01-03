@@ -53,47 +53,46 @@ public class CarService {
         Car car = new Car();
         car.setBrand(carRequestDto.getBrand());
         car.setModel(carRequestDto.getModel());
-        car.setModelYear(carRequestDto.getModelYear());
         car.setLicensePlate(carRequestDto.getLicensePlate());
 
         Car newCar = carRepository.save(car);
         return newCar.getId();
     }
 
-//    public void updateCar(int id, Car car) {
-//        Optional<Car> optionalCar = carRepository.findById(id);
-//
-//        if (optionalCar.isPresent()) {
-//            Car storedCar = optionalCar.get();
-//
-//            car.setId(storedCar.getId());
-//            carRepository.save(car);
-//        }
-//        else {
-//            throw new RecordNotFoundException("ID does not exist!!!");
-//        }
-//    }
-//
-//    public void partialUpdateCar(int id, Car car) {
-//        Optional<Car> optionalCar = carRepository.findById(id);
-//
-//        if (optionalCar.isPresent()) {
-//            Car storedCar = carRepository.findById(id).orElse(null);
-//
-//            if (car.getFirstName()!=null && !car.getFirstName().isEmpty()) {
-//                storedCar.setFirstName(car.getFirstName());
-//            }
-//            if (car.getSecondName()!=null && !car.getSecondName().isEmpty()) {
-//                storedCar.setSecondName(car.getSecondName());
-//            }
-//
-//            carRepository.save(car);
-//
-//        }
-//        else {
-//            throw new RecordNotFoundException("ID does not exist!!!");
-//        }
-//    }
+    public void updateCar(int id, Car car) {
+        Optional<Car> optionalCar = carRepository.findById(id);
+
+        if (optionalCar.isPresent()) {
+            Car storedCar = optionalCar.get();
+
+            car.setId(storedCar.getId());
+            carRepository.save(car);
+        }
+        else {
+            throw new RecordNotFoundException("ID does not exist!!!");
+        }
+    }
+
+    public void partialUpdateCar(int id, Car car) {
+        Optional<Car> optionalCar = carRepository.findById(id);
+
+        if (optionalCar.isPresent()) {
+            Car storedCar = carRepository.findById(id).orElse(null);
+
+            if (car.getBrand()!=null && !car.getBrand().isEmpty()) {
+                storedCar.setBrand(car.getBrand());
+            }
+            if (car.getModel()!=null && !car.getModel().isEmpty()) {
+                storedCar.setModel(car.getModel());
+            }
+
+            carRepository.save(car);
+
+        }
+        else {
+            throw new RecordNotFoundException("ID does not exist!!!");
+        }
+    }
 
 
 

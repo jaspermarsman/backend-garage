@@ -15,10 +15,6 @@ public class CarRequestDto {
         return model;
     }
 
-    public int getModelYear() {
-        return modelYear;
-    }
-
     public String getLicensePlate() {
         return licensePlate;
     }

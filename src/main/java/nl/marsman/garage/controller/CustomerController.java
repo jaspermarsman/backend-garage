@@ -67,7 +67,7 @@ public class CustomerController {
     }
 
     @PostMapping(value = "/customers/{id}/cars")
-    public ResponseEntity<Object> addCustomerCars(@PathVariable int id, @RequestBody Car car) {
+    public ResponseEntity<Object> addCustomerCar(@PathVariable int id, @RequestBody Car car) {
         customerService.addCustomerCars(id, car);
         return  ResponseEntity.created(null).build();
     }

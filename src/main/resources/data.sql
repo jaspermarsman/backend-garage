@@ -13,7 +13,7 @@ INSERT INTO customers (first_name, second_name)
 VALUES
 ('Jasper', 'Marsman');
 
-INSERT INTO cars (brand, model, model_year, license_plate, customer_id)
+INSERT INTO cars (brand, model, license_plate, customer_id)
 values
-('Skoda', 'Fabia', '2011', '64-PKG-5', '1');
+('Skoda', 'Fabia', '64-PKG-5', '1');
 

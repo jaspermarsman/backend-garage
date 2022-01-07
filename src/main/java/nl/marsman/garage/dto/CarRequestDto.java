@@ -3,7 +3,6 @@ package nl.marsman.garage.dto;
 public class CarRequestDto {
     private String brand;
     private String model;
-    private int modelYear;
     private String licensePlate;
     //autopapieren nog toevoegen
 

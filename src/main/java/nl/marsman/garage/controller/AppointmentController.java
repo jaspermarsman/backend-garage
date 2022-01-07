@@ -27,7 +27,7 @@ public class AppointmentController {
 
     @GetMapping(value = "/appointments/{id}")
     public ResponseEntity<Object> getAppointment(@PathVariable int id) {
-        return ResponseEntity.ok(appointmentService.getCar(id));
+        return ResponseEntity.ok(appointmentService.getAppointments(id));
     }
 
     @DeleteMapping(value = "/cars/{id}")

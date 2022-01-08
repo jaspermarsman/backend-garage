@@ -1,11 +1,11 @@
 package nl.marsman.garage.model;
 
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "appointments")
-public class Appointment {
+@MappedSuperclass
+public abstract class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,8 +13,7 @@ public class Appointment {
 
     private LocalDate appointmentDate;
 
-
-    public int getId() {
+     public int getId() {
         return id;
     }
 

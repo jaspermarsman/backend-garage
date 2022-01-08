@@ -1,24 +1,33 @@
 package nl.marsman.garage.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "reparations")
-public class Reparation {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Reparation extends Appointment {
     //attributen
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+
+
+    @JsonIgnoreProperties("reparations")
+    @ManyToOne
+    @JoinColumn(name = "car_id", referencedColumnName = "id")
+    private Car scheduledFor;
+
+
 
     //getters and setters
 
-    public int getId() {
-        return id;
+
+    public Car getScheduledFor() {
+        return scheduledFor;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setScheduledFor(Car scheduledFor) {
+        this.scheduledFor = scheduledFor;
     }
 }

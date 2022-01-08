@@ -1,8 +1,8 @@
 package nl.marsman.garage.controller;
 
-import nl.marsman.garage.dto.InventoryItemRequestDto;
-import nl.marsman.garage.model.InventoryItem;
-import nl.marsman.garage.service.InventoryItemService;
+import nl.marsman.garage.dto.CarPartRequestDto;
+import nl.marsman.garage.model.CarPart;
+import nl.marsman.garage.service.CarPartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,30 +12,30 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-public class InventoryItemController {
+public class CarPartController {
 
     @Autowired
-    private InventoryItemService inventoryItemService;
+    private CarPartService carPartService;
 
     @GetMapping(value = "/inventoryitems")
     public ResponseEntity<Object> getAllInventoryItems(@RequestParam(name="description", defaultValue = "") String description) {
-        return ResponseEntity.ok(inventoryItemService.getAllInventoryItems(description));
+        return ResponseEntity.ok(carPartService.getAllInventoryItems(description));
     }
 
     @GetMapping(value = "/inventoryitems/{id}")
     public ResponseEntity<Object> getInventoryItem(@PathVariable int id) {
-        return ResponseEntity.ok(inventoryItemService.getInventoryItem(id));
+        return ResponseEntity.ok(carPartService.getInventoryItem(id));
     }
 
     @DeleteMapping(value = "/inventoryitems/{id}")
     public ResponseEntity<Object> deleteBook(@PathVariable("id") int id) {
-        inventoryItemService.deleteInventoryItem(id);
+        carPartService.deleteInventoryItem(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping(value = "/inventoryitems")
-    public ResponseEntity<Object> addInventoryItem(@Valid @RequestBody InventoryItemRequestDto inventoryItemRequestDto) {
-        int newId = inventoryItemService.addInventoryItem(inventoryItemRequestDto);
+    public ResponseEntity<Object> addInventoryItem(@Valid @RequestBody CarPartRequestDto carPartRequestDto) {
+        int newId = carPartService.addInventoryItem(carPartRequestDto);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(newId).toUri();
@@ -44,8 +44,8 @@ public class InventoryItemController {
     }
 
     @PutMapping(value = "/inventoryitems/{id}")
-    public ResponseEntity<Object> updateinventoryItem(@PathVariable int id, @RequestBody InventoryItem inventoryItem) {
-        inventoryItemService.updateInventoryItem(id, inventoryItem);
+    public ResponseEntity<Object> updateinventoryItem(@PathVariable int id, @RequestBody CarPart carPart) {
+        carPartService.updateInventoryItem(id, carPart);
 
         return ResponseEntity.noContent().build();
     }

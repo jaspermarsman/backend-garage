@@ -1,9 +1,13 @@
 package nl.marsman.garage.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "car_part")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class CarPart {
 
     @Id
@@ -12,6 +16,10 @@ public class CarPart {
     private String description;
     private double price;
     private int amountInStock;
+
+    @ManyToOne
+    @JoinColumn(name = "reparation_id", referencedColumnName = "id")
+    private Reparation carPart;
 
     // getters and setters
 
@@ -45,5 +53,13 @@ public class CarPart {
 
     public void setAmountInStock(int amountInStock) {
         this.amountInStock = amountInStock;
+    }
+
+    public Reparation getCarPart() {
+        return carPart;
+    }
+
+    public void setCarPart(Reparation carPart) {
+        this.carPart = carPart;
     }
 }

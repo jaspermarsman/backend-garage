@@ -21,7 +21,7 @@ public class ReparationService {
         if (appointmentDate == null) {
             return reparationRepository.findAll();
         } else {
-            return reparationRepository.findAllByAppointmentDate_Chronology(appointmentDate);
+            return reparationRepository.findAllByAppointmentDate(appointmentDate);
         }
 
     }

@@ -8,6 +8,6 @@ import java.time.LocalDate;
 
 @Repository
 public interface ReparationRepository extends JpaRepository<Reparation, Integer> {
-    Iterable<Reparation> findAllByAppointmentDate_Chronology(LocalDate appointmentDate);
+    Iterable<Reparation> findAllByAppointmentDate(LocalDate appointmentDate);
 
 }

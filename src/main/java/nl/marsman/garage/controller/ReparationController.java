@@ -1,5 +1,6 @@
 package nl.marsman.garage.controller;
 
+import nl.marsman.garage.dto.ReparationRequestDto;
 import nl.marsman.garage.service.ReparationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class ReparationController {
     private ReparationService reparationService;
 
     @GetMapping(value = "/reparations")
-    public ResponseEntity<Object> getReparations(@RequestParam(name="licensePlate", defaultValue = "") LocalDate appointmentDate) {
+    public ResponseEntity<Object> getReparations(@RequestParam(name="appointmentDate", defaultValue = "") LocalDate appointmentDate) {
         return ResponseEntity.ok(reparationService.getReparations(appointmentDate));
     }
 
@@ -26,7 +27,7 @@ public class ReparationController {
     }
 
     @DeleteMapping(value = "/reparations/{id}")
-    public ResponseEntity<Object> deleteReparations(@PathVariable("id") int id) {
+    public ResponseEntity<Object> deleteReparation(@PathVariable("id") int id) {
         reparationService.deleteReparation(id);
         return  ResponseEntity.noContent().build();
     }

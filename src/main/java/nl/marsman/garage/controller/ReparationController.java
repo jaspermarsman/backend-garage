@@ -1,6 +1,7 @@
 package nl.marsman.garage.controller;
 
 import nl.marsman.garage.dto.ReparationRequestDto;
+import nl.marsman.garage.model.Car;
 import nl.marsman.garage.service.ReparationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class ReparationController {
     }
 
     @GetMapping(value = "/reparations/{id}")
-    public ResponseEntity<Object> getCar(@PathVariable int id) {
+    public ResponseEntity<Object> getReparation(@PathVariable int id) {
         return ResponseEntity.ok(reparationService.getReparation(id));
     }
 
@@ -53,4 +54,5 @@ public class ReparationController {
 
         return ResponseEntity.noContent().build();
     }
+
 }

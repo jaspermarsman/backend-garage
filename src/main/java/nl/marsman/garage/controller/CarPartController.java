@@ -17,23 +17,23 @@ public class CarPartController {
     @Autowired
     private CarPartService carPartService;
 
-    @GetMapping(value = "/inventoryitems")
+    @GetMapping(value = "/carparts")
     public ResponseEntity<Object> getAllInventoryItems(@RequestParam(name="description", defaultValue = "") String description) {
         return ResponseEntity.ok(carPartService.getAllInventoryItems(description));
     }
 
-    @GetMapping(value = "/inventoryitems/{id}")
+    @GetMapping(value = "/carparts/{id}")
     public ResponseEntity<Object> getInventoryItem(@PathVariable int id) {
         return ResponseEntity.ok(carPartService.getInventoryItem(id));
     }
 
-    @DeleteMapping(value = "/inventoryitems/{id}")
+    @DeleteMapping(value = "/carparts/{id}")
     public ResponseEntity<Object> deleteBook(@PathVariable("id") int id) {
         carPartService.deleteInventoryItem(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping(value = "/inventoryitems")
+    @PostMapping(value = "/carparts")
     public ResponseEntity<Object> addInventoryItem(@Valid @RequestBody CarPartRequestDto carPartRequestDto) {
         int newId = carPartService.addInventoryItem(carPartRequestDto);
 
@@ -43,7 +43,7 @@ public class CarPartController {
         return ResponseEntity.created(location).build();
     }
 
-    @PutMapping(value = "/inventoryitems/{id}")
+    @PutMapping(value = "/carparts/{id}")
     public ResponseEntity<Object> updateinventoryItem(@PathVariable int id, @RequestBody CarPart carPart) {
         carPartService.updateInventoryItem(id, carPart);
 

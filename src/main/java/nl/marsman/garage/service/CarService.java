@@ -4,10 +4,15 @@ import nl.marsman.garage.dto.CarRequestDto;
 import nl.marsman.garage.dto.CustomerRequestDto;
 import nl.marsman.garage.exception.RecordNotFoundException;
 import nl.marsman.garage.model.Car;
+import nl.marsman.garage.model.Customer;
+import nl.marsman.garage.model.Reparation;
 import nl.marsman.garage.repository.CarRepository;
 
+import nl.marsman.garage.repository.ReparationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,6 +20,9 @@ public class CarService {
 
     @Autowired
     private CarRepository carRepository;
+
+    @Autowired
+    private ReparationRepository reparationRepository;
 
     public Iterable<Car> getCars(String licensePlate) {
         if (licensePlate.isEmpty()) {
@@ -94,6 +102,36 @@ public class CarService {
         }
         else {
             throw new RecordNotFoundException("ID does not exist!!!");
+        }
+    }
+
+    public void  addCarReparation(int id, Reparation reparation) {
+        Optional<Car> optionalCar = carRepository.findById(id);
+
+        if (optionalCar.isPresent()) {
+            Car car = optionalCar.get();
+            List<Reparation> reparations = car.getReparations();
+
+            reparationRepository.save(reparation);
+
+            reparations.add(reparation);
+            carRepository.save(car);
+
+        }
+        else {
+            throw new RecordNotFoundException("ID does not exist!");
+        }
+    }
+
+    public List<Reparation> getCarReparations(int id){
+        Optional<Car> optionalCar = carRepository.findById(id);
+
+        if (optionalCar.isPresent()) {
+            Car car = optionalCar.get();
+            return car.getReparations();
+        }
+        else {
+            throw new RecordNotFoundException("ID does not exist!");
         }
     }
 

@@ -2,12 +2,15 @@ package nl.marsman.garage.service;
 
 import nl.marsman.garage.dto.ReparationRequestDto;
 import nl.marsman.garage.exception.RecordNotFoundException;
+import nl.marsman.garage.model.Car;
+import nl.marsman.garage.model.Customer;
 import nl.marsman.garage.model.Reparation;
 import nl.marsman.garage.repository.ReparationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,8 +47,8 @@ public class ReparationService {
 
         Reparation reparation = new Reparation();
         reparation.setAppointmentDate(reparationRequestDto.getAppointmentDate());
-        Reparation newRepair = reparationRepository.save(reparation);
-        return newRepair.getId();
+        Reparation newReparation = reparationRepository.save(reparation);
+        return newReparation.getId();
     }
 
     public void updateReparation(int id, ReparationRequestDto reparationRequestDto) {
@@ -85,5 +88,7 @@ public class ReparationService {
             throw new RecordNotFoundException("ID does not exist!!!");
         }
     }
+
+
 
 }

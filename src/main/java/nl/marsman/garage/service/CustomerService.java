@@ -89,7 +89,7 @@ public class CustomerService {
                 storedCustomer.setSecondName(customer.getSecondName());
             }
 
-            customerRepository.save(customer);
+            customerRepository.save(storedCustomer);
 
         }
         else {

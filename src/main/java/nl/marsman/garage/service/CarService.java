@@ -85,14 +85,19 @@ public class CarService {
             if (car.getModel()!=null && !car.getModel().isEmpty()) {
                 storedCar.setModel(car.getModel());
             }
+            if (car.getLicensePlate()!=null && !car.getLicensePlate().isEmpty()) {
+                storedCar.setLicensePlate(car.getLicensePlate());
+            }
 
-            carRepository.save(car);
+            carRepository.save(storedCar);
 
         }
         else {
             throw new RecordNotFoundException("ID does not exist!!!");
         }
     }
+
+
 
 
 

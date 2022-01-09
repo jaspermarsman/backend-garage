@@ -17,3 +17,12 @@ INSERT INTO cars (brand, model, license_plate, customer_id)
 values
 ('Skoda', 'Fabia', '64-PKG-5', '1');
 
+INSERT INTO car_parts (description, price, amount_in_stock)
+values
+('exhaust', '100', '5'),
+('brake-disc', '50', '4'),
+('clutch-plate', '80', '8');
+
+INSERT INTO reparations (appointment_date, car_id)
+values
+('2022-02-02', '1');

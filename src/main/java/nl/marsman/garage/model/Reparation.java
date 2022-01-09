@@ -8,7 +8,9 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "reparations")
@@ -22,14 +24,15 @@ public class Reparation extends Appointment {
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car scheduledFor;
 
-    @OneToMany(mappedBy = "carPart", cascade = CascadeType.ALL, orphanRemoval = true)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<CarPart> carParts = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "reparations")
+    private Set<CarPart> carParts;
 
+//    @OneToMany(mappedBy = "reparation_id", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @LazyCollection(LazyCollectionOption.FALSE)
+//    private List<CarPart> carParts = new ArrayList<>();
 
     //getters and setters
-
 
     public Car getScheduledFor() {
         return scheduledFor;
@@ -39,11 +42,22 @@ public class Reparation extends Appointment {
         this.scheduledFor = scheduledFor;
     }
 
-    public List<CarPart> getCarParts() {
+
+
+//    public List<CarPart> getCarParts() {
+//       return carParts;
+//    }
+//
+//    public void setCarParts(List<CarPart> carParts) {
+//        this.carParts = carParts;
+//    }
+
+
+    public Set<CarPart> getCarParts() {
         return carParts;
     }
 
-    public void setCarParts(List<CarPart> carParts) {
+    public void setCarParts(Set<CarPart> carParts) {
         this.carParts = carParts;
     }
 }

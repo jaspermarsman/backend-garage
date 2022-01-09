@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "car_parts")
@@ -17,9 +18,13 @@ public class CarPart {
     private double price;
     private int amountInStock;
 
-    @ManyToOne
-    @JoinColumn(name = "reparation_id", referencedColumnName = "id")
-    private Reparation carPart;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable
+    private Set<Reparation> reparations;
+
+//    @ManyToOne
+//    @JoinColumn(name = "reparation_id", referencedColumnName = "id")
+//    private Reparation carPart;
 
     // getters and setters
 
@@ -55,11 +60,20 @@ public class CarPart {
         this.amountInStock = amountInStock;
     }
 
-    public Reparation getCarPart() {
-        return carPart;
+//    public Reparation getCarPart() {
+//        return carPart;
+//    }
+//
+//    public void setCarPart(Reparation carPart) {
+//        this.carPart = carPart;
+//    }
+
+
+    public Set<Reparation> getReparations() {
+        return reparations;
     }
 
-    public void setCarPart(Reparation carPart) {
-        this.carPart = carPart;
+    public void setReparations(Set<Reparation> reparations) {
+        this.reparations = reparations;
     }
 }

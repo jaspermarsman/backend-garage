@@ -25,8 +25,8 @@ public class Reparation extends Appointment {
     private Car scheduledFor;
 
 
-    @ManyToMany(mappedBy = "reparations")
-    private List<CarPart> carParts;
+    @ManyToMany(mappedBy = "reparations", fetch = FetchType.EAGER)
+    private List<CarPart> carParts = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "reparation_id", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @LazyCollection(LazyCollectionOption.FALSE)

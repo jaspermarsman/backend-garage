@@ -3,8 +3,10 @@ package nl.marsman.garage.service;
 import nl.marsman.garage.dto.ReparationRequestDto;
 import nl.marsman.garage.exception.RecordNotFoundException;
 import nl.marsman.garage.model.Car;
+import nl.marsman.garage.model.CarPart;
 import nl.marsman.garage.model.Customer;
 import nl.marsman.garage.model.Reparation;
+import nl.marsman.garage.repository.CarPartRepository;
 import nl.marsman.garage.repository.ReparationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class ReparationService {
 
     @Autowired
     private ReparationRepository reparationRepository;
+
+    @Autowired
+    private CarPartRepository carPartRepository;
 
     public Iterable<Reparation> getReparations(LocalDate appointmentDate) {
 
@@ -86,6 +91,36 @@ public class ReparationService {
         } else {
 
             throw new RecordNotFoundException("ID does not exist!!!");
+        }
+    }
+
+    public void  addReparationCarPart(int id, CarPart carPart) {
+        Optional<Reparation> optionalReparation = reparationRepository.findById(id);
+
+        if (optionalReparation.isPresent()) {
+            Reparation reparation = optionalReparation.get();
+            List<CarPart> carParts = reparation.getCarParts();
+
+            carPartRepository.save(carPart);
+
+            carParts.add(carPart);
+            reparationRepository.save(reparation);
+
+        }
+        else {
+            throw new RecordNotFoundException("ID does not exist!");
+        }
+    }
+
+    public List<CarPart> getReparationCarParts(int id){
+        Optional<Reparation> optionalReparation = reparationRepository.findById(id);
+
+        if (optionalReparation.isPresent()) {
+            Reparation reparation = optionalReparation.get();
+            return reparation.getCarParts();
+        }
+        else {
+            throw new RecordNotFoundException("ID does not exist!");
         }
     }
 

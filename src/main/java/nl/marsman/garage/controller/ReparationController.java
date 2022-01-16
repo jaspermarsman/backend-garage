@@ -2,6 +2,8 @@ package nl.marsman.garage.controller;
 
 import nl.marsman.garage.dto.ReparationRequestDto;
 import nl.marsman.garage.model.Car;
+import nl.marsman.garage.model.CarPart;
+import nl.marsman.garage.model.Reparation;
 import nl.marsman.garage.service.ReparationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +55,17 @@ public class ReparationController {
         reparationService.partialUpdateReparation(id, reparationRequestDto);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(value = "/reparations/{id}/carparts")
+    public ResponseEntity<Object> addReparationCarPart(@PathVariable int id, @RequestBody CarPart carPart) {
+        reparationService.addReparationCarPart(id, carPart);
+        return  ResponseEntity.created(null).build();
+    }
+
+    @GetMapping(value = "/reparations/{id}/carparts")
+    public ResponseEntity<Object> getReparationCarParts(@PathVariable int id) {
+        return ResponseEntity.ok(reparationService.getReparationCarParts(id));
     }
 
 }

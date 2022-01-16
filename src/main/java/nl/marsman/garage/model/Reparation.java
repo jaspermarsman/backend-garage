@@ -28,13 +28,6 @@ public class Reparation extends Appointment {
     private List<CarPart> reparationParts = new ArrayList<>();
 
 
-//    @ManyToMany(mappedBy = "reparations", fetch = FetchType.EAGER)
-//    private List<CarPart> carParts = new ArrayList<>();
-
-//    @OneToMany(mappedBy = "reparation_id", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @LazyCollection(LazyCollectionOption.FALSE)
-//    private List<CarPart> carParts = new ArrayList<>();
-
     //getters and setters
 
     public Car getScheduledFor() {
@@ -44,25 +37,6 @@ public class Reparation extends Appointment {
     public void setScheduledFor(Car scheduledFor) {
         this.scheduledFor = scheduledFor;
     }
-
-
-
-//    public List<CarPart> getCarParts() {
-//       return carParts;
-//    }
-//
-//    public void setCarParts(List<CarPart> carParts) {
-//        this.carParts = carParts;
-//    }
-
-
-//    public List<CarPart> getCarParts() {
-//        return carParts;
-//    }
-//
-//    public void setCarParts(List<CarPart> carParts) {
-//        this.carParts = carParts;
-//    }
 
 
     public List<CarPart> getReparationParts() {

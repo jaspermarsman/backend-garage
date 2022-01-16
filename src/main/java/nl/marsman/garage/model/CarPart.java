@@ -1,12 +1,12 @@
 package nl.marsman.garage.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "car_parts")
@@ -20,6 +20,7 @@ public class CarPart {
     private double price;
     private int amountInStock;
 
+    @JsonIgnoreProperties("reparationParts")
     @ManyToMany
     @JoinTable(name = "used_car_parts", joinColumns = @JoinColumn(name = "car_parts_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "reparation_id") )
     private List<Reparation> usedForReparation = new ArrayList<>();

@@ -99,11 +99,11 @@ public class ReparationService {
 
         if (optionalReparation.isPresent()) {
             Reparation reparation = optionalReparation.get();
-            List<CarPart> carParts = reparation.getCarParts();
+            List<CarPart> usedCarParts = reparation.getReparationParts();
 
             carPartRepository.save(carPart);
 
-            carParts.add(carPart);
+            usedCarParts.add(carPart);
             reparationRepository.save(reparation);
 
         }
@@ -117,7 +117,7 @@ public class ReparationService {
 
         if (optionalReparation.isPresent()) {
             Reparation reparation = optionalReparation.get();
-            return reparation.getCarParts();
+            return reparation.getReparationParts();
         }
         else {
             throw new RecordNotFoundException("ID does not exist!");

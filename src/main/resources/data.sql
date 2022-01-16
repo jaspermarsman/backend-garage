@@ -26,3 +26,8 @@ values
 INSERT INTO reparations (appointment_date, car_id)
 values
 ('2022-02-02', '1');
+
+INSERT INTO used_car_parts (car_parts_id, reparation_id)
+values
+('1', '1'),
+('2', '1');

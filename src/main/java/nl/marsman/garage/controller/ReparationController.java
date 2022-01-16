@@ -57,15 +57,15 @@ public class ReparationController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping(value = "/reparations/{id}/carparts")
-    public ResponseEntity<Object> addReparationCarPart(@PathVariable int id, @RequestBody CarPart carPart) {
-        reparationService.addReparationCarPart(id, carPart);
-        return  ResponseEntity.created(null).build();
-    }
-
-    @GetMapping(value = "/reparations/{id}/carparts")
-    public ResponseEntity<Object> getReparationCarParts(@PathVariable int id) {
-        return ResponseEntity.ok(reparationService.getReparationCarParts(id));
-    }
+//    @PostMapping(value = "/reparations/{id}/carparts")
+//    public ResponseEntity<Object> addReparationCarPart(@PathVariable int id, @RequestBody CarPart carPart) {
+//        reparationService.addReparationCarPart(id, carPart);
+//        return  ResponseEntity.created(null).build();
+//    }
+//
+//    @GetMapping(value = "/reparations/{id}/carparts")
+//    public ResponseEntity<Object> getReparationCarParts(@PathVariable int id) {
+//        return ResponseEntity.ok(reparationService.getReparationCarParts(id));
+//    }
 
 }

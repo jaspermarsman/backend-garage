@@ -24,9 +24,12 @@ public class Reparation extends Appointment {
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car scheduledFor;
 
+    @ManyToMany(mappedBy = "usedForReparation")
+    private List<CarPart> reparationParts = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "reparations", fetch = FetchType.EAGER)
-    private List<CarPart> carParts = new ArrayList<>();
+
+//    @ManyToMany(mappedBy = "reparations", fetch = FetchType.EAGER)
+//    private List<CarPart> carParts = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "reparation_id", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @LazyCollection(LazyCollectionOption.FALSE)
@@ -53,11 +56,20 @@ public class Reparation extends Appointment {
 //    }
 
 
-    public List<CarPart> getCarParts() {
-        return carParts;
+//    public List<CarPart> getCarParts() {
+//        return carParts;
+//    }
+//
+//    public void setCarParts(List<CarPart> carParts) {
+//        this.carParts = carParts;
+//    }
+
+
+    public List<CarPart> getReparationParts() {
+        return reparationParts;
     }
 
-    public void setCarParts(List<CarPart> carParts) {
-        this.carParts = carParts;
+    public void setReparationParts(List<CarPart> reparationParts) {
+        this.reparationParts = reparationParts;
     }
 }

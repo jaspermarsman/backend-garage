@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -19,9 +20,13 @@ public class CarPart {
     private double price;
     private int amountInStock;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable
-    private List<Reparation> reparations;
+    @ManyToMany
+    @JoinTable(name = "used_car_parts", joinColumns = @JoinColumn(name = "car_parts_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "reparation_id") )
+    private List<Reparation> usedForReparation = new ArrayList<>();
+
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable
+//    private List<Reparation> reparations;
 
 //    @ManyToOne
 //    @JoinColumn(name = "reparation_id", referencedColumnName = "id")
@@ -70,11 +75,20 @@ public class CarPart {
 //    }
 
 
-    public List<Reparation> getReparations() {
-        return reparations;
+//    public List<Reparation> getReparations() {
+//        return reparations;
+//    }
+//
+//    public void setReparations(List<Reparation> reparations) {
+//        this.reparations = reparations;
+//    }
+
+
+    public List<Reparation> getUsedForReparation() {
+        return usedForReparation;
     }
 
-    public void setReparations(List<Reparation> reparations) {
-        this.reparations = reparations;
+    public void setUsedForReparation(List<Reparation> usedForReparation) {
+        this.usedForReparation = usedForReparation;
     }
 }

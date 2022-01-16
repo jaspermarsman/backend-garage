@@ -26,7 +26,7 @@ public class Reparation extends Appointment {
 
 
     @ManyToMany(mappedBy = "reparations")
-    private Set<CarPart> carParts;
+    private List<CarPart> carParts;
 
 //    @OneToMany(mappedBy = "reparation_id", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @LazyCollection(LazyCollectionOption.FALSE)
@@ -53,11 +53,11 @@ public class Reparation extends Appointment {
 //    }
 
 
-    public Set<CarPart> getCarParts() {
+    public List<CarPart> getCarParts() {
         return carParts;
     }
 
-    public void setCarParts(Set<CarPart> carParts) {
+    public void setCarParts(List<CarPart> carParts) {
         this.carParts = carParts;
     }
 }

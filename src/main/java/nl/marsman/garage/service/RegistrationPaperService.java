@@ -1,24 +1,20 @@
 package nl.marsman.garage.service;
 
-import nl.marsman.garage.model.FileDocument;
-import nl.marsman.garage.repository.DocFileDao;
+import nl.marsman.garage.model.RegistrationPaper;
+import nl.marsman.garage.repository.RegistrationPaperRepository;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.io.File;
 import java.net.MalformedURLException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
-public class DatabaseService {
-    private DocFileDao doc;
+public class RegistrationPaperService {
+    private RegistrationPaperRepository doc;
 
-    public DatabaseService(DocFileDao doc){
+    public RegistrationPaperService(RegistrationPaperRepository doc){
         this.doc = doc;
     }
 
@@ -42,7 +38,7 @@ public class DatabaseService {
         }
     }
 
-    public Collection<FileDocument> getALlFromDB() {
+    public Collection<RegistrationPaper> getALlFromDB() {
         return doc.findAll();
     }
 }

@@ -1,12 +1,9 @@
 package nl.marsman.garage.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 @Entity
-public class FileDocument {
+public class RegistrationPaper {
 
     @Id
     @GeneratedValue
@@ -16,6 +13,10 @@ public class FileDocument {
 
     @Lob
     private byte[] docFile;
+
+    @OneToOne
+    @JoinColumn(name = "car_id", referencedColumnName = "id")
+    private Car car;
 
     public Long getId() {
         return id;
@@ -39,5 +40,13 @@ public class FileDocument {
 
     public void setDocFile(byte[] docFile) {
         this.docFile = docFile;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 }

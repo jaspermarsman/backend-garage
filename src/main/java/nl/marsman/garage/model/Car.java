@@ -20,7 +20,6 @@ public class Car {
     private String brand;
     private String model;
     private String licensePlate;
-    //autopapieren nog toevoegen
 
     @JsonIgnoreProperties("cars")
     @ManyToOne
@@ -29,6 +28,10 @@ public class Car {
 
     @OneToMany(mappedBy = "scheduledFor", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reparation> reparations = new ArrayList<>();
+
+    @OneToOne(mappedBy = "car")
+    @JoinColumn(name = "registration_paper_id", referencedColumnName = "id")
+    private RegistrationPaper registrationPaper;
 
     //getters and setters
 
@@ -81,4 +84,11 @@ public class Car {
         this.reparations = reparations;
     }
 
+    public RegistrationPaper getRegistrationPaper() {
+        return registrationPaper;
+    }
+
+    public void setRegistrationPapers(RegistrationPaper registrationPaper) {
+        this.registrationPaper = registrationPaper;
+    }
 }

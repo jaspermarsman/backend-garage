@@ -1,9 +1,9 @@
 package nl.marsman.garage.controller;
 
-import nl.marsman.garage.model.FileDocument;
+import nl.marsman.garage.model.RegistrationPaper;
 import nl.marsman.garage.model.FileUploadResponse;
-import nl.marsman.garage.repository.DocFileDao;
-import nl.marsman.garage.service.DatabaseService;
+import nl.marsman.garage.repository.RegistrationPaperRepository;
+import nl.marsman.garage.service.RegistrationPaperService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -26,28 +26,28 @@ import java.util.zip.ZipOutputStream;
 
 @CrossOrigin
 @RestController
-public class UploadDownloadWithDatabaseController {
+public class RegistrationPaperController {
 
-    private DocFileDao docFileDao;
-    private DatabaseService databaseService;
+    private RegistrationPaperRepository registrationPaperRepository;
+    private RegistrationPaperService databaseService;
 
-    public UploadDownloadWithDatabaseController(DocFileDao docFileDao, DatabaseService databaseService) {
+    public RegistrationPaperController(RegistrationPaperRepository registrationPaperRepository, RegistrationPaperService databaseService) {
         this.databaseService = databaseService;
-        this.docFileDao = docFileDao;
+        this.registrationPaperRepository = registrationPaperRepository;
     }
 
-    @PostMapping("single/uploadDb")
+    @PostMapping("upload/registration-papers")
     FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
 
         String name = StringUtils.cleanPath(file.getOriginalFilename());
-        FileDocument fileDocument = new FileDocument();
-        fileDocument.setFileName(name);
-        fileDocument.setDocFile(file.getBytes());
+        RegistrationPaper registrationPaper = new RegistrationPaper();
+        registrationPaper.setFileName(name);
+        registrationPaper.setDocFile(file.getBytes());
 
-        docFileDao.save(fileDocument);
+        registrationPaperRepository.save(registrationPaper);
 
         // next line makes url. example "http://localhost:8080/download/naam.jpg"
-        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFromDB/").path(name).toUriString();
+        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/registration-papers/").path(name).toUriString();
 
         String contentType = file.getContentType();
 
@@ -57,10 +57,10 @@ public class UploadDownloadWithDatabaseController {
     }
 
     //    get for single download
-    @GetMapping("/downloadFromDB/{fileName}")
+    @GetMapping("/download/registration-papers/{fileName}")
     ResponseEntity<byte[]> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
 
-        FileDocument doc = docFileDao.findByFileName(fileName);
+        RegistrationPaper doc = registrationPaperRepository.findByFileName(fileName);
 
 //        this mediaType decides witch type you accept if you only accept 1 type
 //        MediaType contentType = MediaType.IMAGE_JPEG;
@@ -86,15 +86,15 @@ public class UploadDownloadWithDatabaseController {
         Arrays.asList(files).stream().forEach(file -> {
 
             String name = StringUtils.cleanPath(file.getOriginalFilename());
-            FileDocument fileDocument = new FileDocument();
-            fileDocument.setFileName(name);
+            RegistrationPaper registrationPaper = new RegistrationPaper();
+            registrationPaper.setFileName(name);
             try {
-                fileDocument.setDocFile(file.getBytes());
+                registrationPaper.setDocFile(file.getBytes());
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            docFileDao.save(fileDocument);
+            registrationPaperRepository.save(registrationPaper);
 
 //            next line makes url. example "http://localhost:8080/download/naam.jpg"
             String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFromDB/").path(name).toUriString();
@@ -137,7 +137,7 @@ public class UploadDownloadWithDatabaseController {
     }
 
     @GetMapping("/getAll/db")
-    public Collection<FileDocument> getAllFromDB(){
+    public Collection<RegistrationPaper> getAllFromDB(){
         return databaseService.getALlFromDB();
     }
 }

@@ -20,7 +20,7 @@ public class CarPart {
     private double price;
     private int amountInStock;
 
-    @JsonIgnoreProperties("reparationParts")
+    @JsonIgnoreProperties("usedForReparation")
     @ManyToMany
     @JoinTable(name = "used_car_parts", joinColumns = @JoinColumn(name = "car_parts_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "reparation_id") )
     private List<Reparation> usedForReparation = new ArrayList<>();

@@ -36,7 +36,7 @@ public class RegistrationPaperController {
         this.registrationPaperRepository = registrationPaperRepository;
     }
 
-    @PostMapping("upload/registration-papers")
+    @PostMapping("registration-papers/upload")
     FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
 
         String name = StringUtils.cleanPath(file.getOriginalFilename());
@@ -47,7 +47,7 @@ public class RegistrationPaperController {
         registrationPaperRepository.save(registrationPaper);
 
         // next line makes url. example "http://localhost:8080/download/naam.jpg"
-        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/registration-papers/").path(name).toUriString();
+        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/registration-papers/download/").path(name).toUriString();
 
         String contentType = file.getContentType();
 
@@ -57,7 +57,7 @@ public class RegistrationPaperController {
     }
 
     //    get for single download
-    @GetMapping("/download/registration-papers/{fileName}")
+    @GetMapping("/registration-papers/download/{fileName}")
     ResponseEntity<byte[]> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
 
         RegistrationPaper doc = registrationPaperRepository.findByFileName(fileName);
@@ -75,11 +75,11 @@ public class RegistrationPaperController {
     }
 
     //    post for multiple uploads to database
-    @PostMapping("/multiple/upload/db")
+    @PostMapping("/registration-papers/multi-upload")
     List<FileUploadResponse> multipleUpload(@RequestParam("files") MultipartFile [] files) {
 
         if(files.length > 7) {
-            throw new RuntimeException("to many files selected");
+            throw new RuntimeException("too many files selected");
         }
 
         List<FileUploadResponse> uploadResponseList = new ArrayList<>();
@@ -110,7 +110,7 @@ public class RegistrationPaperController {
 
     }
 
-    @GetMapping("zipDownload/db")
+    @GetMapping("registration-papers/zipDownload/")
     public void zipDownload(@RequestParam("fileName") String[] files, HttpServletResponse response) throws IOException {
 
 
@@ -136,7 +136,7 @@ public class RegistrationPaperController {
         response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=zipfile");
     }
 
-    @GetMapping("/getAll/db")
+    @GetMapping("/registration-papers/getAll")
     public Collection<RegistrationPaper> getAllFromDB(){
         return databaseService.getALlFromDB();
     }

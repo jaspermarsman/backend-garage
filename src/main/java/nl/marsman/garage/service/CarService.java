@@ -138,23 +138,8 @@ public class CarService {
         }
     }
 
-    public void  addCarRegistrationPapers(int id, RegistrationPaper registrationPaper) {
-        Optional<Car> optionalCar = carRepository.findById(id);
 
-        if (optionalCar.isPresent()) {
-            Car car = optionalCar.get();
-            List<RegistrationPaper> registrationPapers = (List<RegistrationPaper>) car.getRegistrationPaper();
 
-            registrationPaperRepository.save(registrationPaper);
-
-            registrationPapers.add(registrationPaper);
-            carRepository.save(car);
-
-        }
-        else {
-            throw new RecordNotFoundException("ID does not exist!");
-        }
-    }
 
 
 

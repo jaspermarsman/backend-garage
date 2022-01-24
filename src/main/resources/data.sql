@@ -1,13 +1,15 @@
 INSERT INTO users (username, password, enabled, email)
 VALUES
-    ('user', '$2y$10$Asnk2HVhhHTwlOur0beC8.SQSHd.zOCKidUPIJYC4xSKy/CAxToQy', TRUE, 'user@gmail.com'),
+    ('mechanic', '$2y$10$Asnk2HVhhHTwlOur0beC8.SQSHd.zOCKidUPIJYC4xSKy/CAxToQy', TRUE, 'mechanic@gmail.com'),
+    ('backoffice', '$2y$10$Asnk2HVhhHTwlOur0beC8.SQSHd.zOCKidUPIJYC4xSKy/CAxToQy', TRUE, 'backoffice@gmail.com'),
     ('admin', '$2y$10$Asnk2HVhhHTwlOur0beC8.SQSHd.zOCKidUPIJYC4xSKy/CAxToQy', TRUE, 'admin@gmail.com');
 
 INSERT INTO authorities (username, authority)
 VALUES
-('user', 'ROLE_USER'),
+('mechanic', 'ROLE_MECHANIC'),
 ('admin', 'ROLE_USER'),
-('admin', 'ROLE_ADMIN' );
+('admin', 'ROLE_ADMIN' ),
+('backoffice', 'ROLE_BACKOFFICE');
 
 INSERT INTO customers (first_name, second_name)
 VALUES

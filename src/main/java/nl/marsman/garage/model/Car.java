@@ -33,7 +33,17 @@ public class Car {
     @JoinColumn(name = "registration_paper_id", referencedColumnName = "id")
     private RegistrationPaper registrationPaper;
 
-    //getters and setters
+    public Car(String brand, String model, String licensePlate) {
+        this.brand = brand;
+        this.model = model;
+        this.licensePlate = licensePlate;
+    }
+
+    public Car() {
+
+    }
+
+//getters and setters
 
 
     public int getId() {

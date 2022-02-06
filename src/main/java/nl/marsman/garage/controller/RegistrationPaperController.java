@@ -36,7 +36,7 @@ public class RegistrationPaperController {
         this.registrationPaperRepository = registrationPaperRepository;
     }
 
-    @PostMapping("registration-papers/upload")
+    @PostMapping("/registration-papers/upload")
     FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
 
         String name = StringUtils.cleanPath(file.getOriginalFilename());
@@ -46,7 +46,6 @@ public class RegistrationPaperController {
 
         registrationPaperRepository.save(registrationPaper);
 
-        // next line makes url. example "http://localhost:8080/download/naam.jpg"
         String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/registration-papers/download/").path(name).toUriString();
 
         String contentType = file.getContentType();
@@ -56,25 +55,16 @@ public class RegistrationPaperController {
         return response;
     }
 
-    //    get for single download
     @GetMapping("/registration-papers/download/{fileName}")
     ResponseEntity<byte[]> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
 
         RegistrationPaper doc = registrationPaperRepository.findByFileName(fileName);
 
-//        this mediaType decides witch type you accept if you only accept 1 type
-//        MediaType contentType = MediaType.IMAGE_JPEG;
-//        this is going to accept multiple types
-
         String mimeType = request.getServletContext().getMimeType(doc.getFileName());
 
-//        for download attachment use next line
-//        return ResponseEntity.ok().contentType(contentType).header(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + resource.getFilename()).body(resource);
-//        for showing image in browser
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + doc.getFileName()).body(doc.getDocFile());
     }
 
-    //    post for multiple uploads to database
     @PostMapping("/registration-papers/multi-upload")
     List<FileUploadResponse> multipleUpload(@RequestParam("files") MultipartFile [] files) {
 
@@ -96,7 +86,7 @@ public class RegistrationPaperController {
 
             registrationPaperRepository.save(registrationPaper);
 
-//            next line makes url. example "http://localhost:8080/download/naam.jpg"
+
             String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFromDB/").path(name).toUriString();
 
             String contentType = file.getContentType();
